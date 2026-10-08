@@ -1,7 +1,7 @@
 # R10-Xtreme
 
 Next.js (App Router) site for IEEE R10-Xtreme. Pulls events from the IEEE
-vTools Events API, keeps only the ones tagged `#IEEE`, and renders each one's
+vTools Events API, keeps only the ones tagged `#IEEEXtreme`, and renders each one's
 photo, title, description, hashtags, section, Student Branch, and a
 **Register now** button.
 

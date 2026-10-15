@@ -45,3 +45,12 @@ html {
     linear-gradient(90deg, rgba(0, 217, 192, 0.06) 1px, transparent 1px);
   background-size: 42px 42px;
 }
+
+.text-display {
+  font-family: 'General Sans', var(--font-display), system-ui, sans-serif;
+  font-size: clamp(2.5rem, 6.2vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+}
+

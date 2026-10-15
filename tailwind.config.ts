@@ -16,9 +16,9 @@ const config: Config = {
         muted: "#9C948A"
       },
       fontFamily: {
-        display: ["var(--font-display)"],
-        body: ["var(--font-body)"],
-        mono: ["var(--font-mono)"]
+        display: ["'General Sans'", "var(--font-display)", "sans-serif"],
+        body: ["var(--font-body)", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"]
       },
       backgroundImage: {
         circuit:

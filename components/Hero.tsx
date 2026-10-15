@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import InteractiveHoverButton from "./InteractiveHoverButton";
 import AnimatedGridPattern from "./AnimatedGridPattern";
+import KineticText from "./KineticText";
 import { cn } from "@/lib/utils";
 
 export default function Hero() {
@@ -103,28 +104,29 @@ export default function Hero() {
         </p>
 
         <div className="mt-6 max-w-4xl space-y-1">
-          <div
+          <KineticText
             ref={(el) => {
-              linesRef.current[0] = el;
+              linesRef.current[0] = el as HTMLDivElement | null;
             }}
-            className="text-display text-text"
+            text="Where R10 builds, competes,"
+            as="div"
+            className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-text md:text-7xl"
             style={{
               willChange: "clip-path, opacity, transform",
             }}
-          >
-            Where R10 builds, competes,
-          </div>
-          <div
+          />
+          <KineticText
             ref={(el) => {
-              linesRef.current[1] = el;
+              linesRef.current[1] = el as HTMLDivElement | null;
             }}
-            className="text-display text-text"
+            text="and ships."
+            highlight={{ word: "ships", className: "text-signal" }}
+            as="div"
+            className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-text md:text-7xl"
             style={{
               willChange: "clip-path, opacity, transform",
             }}
-          >
-            and <span className="text-signal">ships</span>.
-          </div>
+          />
         </div>
 
         <p

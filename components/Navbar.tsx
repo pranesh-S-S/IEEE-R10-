@@ -3,13 +3,13 @@
 import { useState } from "react";
 
 const LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Events", href: "#events" },
-  { label: "Team", href: "#committee" },
-  { label: "Rules", href: "#rules" },
-  { label: "Guide", href: "#guide" },
-  { label: "Contact", href: "#ContactPage" }
+  { label: "Home", href: "/#home" },
+  { label: "About", href: "/#about" },
+  { label: "Events", href: "/#events" },
+  { label: "Team", href: "/#committee" },
+  { label: "Rules", href: "/#rules" },
+  { label: "Guide", href: "/#guide" },
+  { label: "Contact", href: "/#ContactPage" }
 ];
 
 export default function Navbar() {

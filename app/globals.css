@@ -7,13 +7,28 @@ html {
 }
 
 ::selection {
-  background: #00d9c0;
-  color: #080b12;
+  background: #FF6A1F;
+  color: #0A0908;
 }
 
 :focus-visible {
-  outline: 2px solid #00d9c0;
+  outline: 2px solid #FF6A1F;
   outline-offset: 3px;
+}
+
+@media (any-hover: hover) and (any-pointer: fine) {
+  *,
+  *::before,
+  *::after,
+  html,
+  body {
+    cursor: none !important;
+  }
+  input,
+  textarea,
+  select {
+    cursor: text !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

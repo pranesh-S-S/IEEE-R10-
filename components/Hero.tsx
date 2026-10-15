@@ -1,9 +1,25 @@
+import InteractiveHoverButton from "./InteractiveHoverButton";
+import AnimatedGridPattern from "./AnimatedGridPattern";
+import { cn } from "@/lib/utils";
+
 export default function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden border-b border-line/70 bg-grid pt-40 pb-28">
+    <section id="home" className="relative overflow-hidden border-b border-line/70 bg-void pt-40 pb-28">
+      {/* Animated Grid Pattern */}
+      <AnimatedGridPattern
+        numSquares={45}
+        maxOpacity={0.4}
+        duration={3}
+        repeatDelay={0.6}
+        className={cn(
+          "[mask-image:radial-gradient(850px_circle_at_center,white,transparent)]",
+          "fill-[#FF6A1F]/15 stroke-white/[0.07] text-[#FF6A1F]"
+        )}
+      />
+
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-signalDim/20 via-transparent to-void" />
 
-      <div className="relative mx-auto max-w-6xl px-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-signal">
           IEEE Region 10 · IEEEXtreme
         </p>
@@ -18,19 +34,13 @@ export default function Hero() {
           <code className="rounded bg-panel px-1.5 py-0.5 font-mono text-signal">#IEEE</code>{" "}
           across the Section, in one feed.
         </p>
-        <div className="mt-10 flex flex-wrap gap-4">
-          <a
-            href="#events"
-            className="rounded-full bg-signal px-6 py-3 font-mono text-sm font-medium text-void transition-transform hover:scale-105"
-          >
+        <div className="mt-10 flex flex-wrap items-center gap-5">
+          <InteractiveHoverButton href="#events" variant="primary">
             View live events
-          </a>
-          <a
-            href="#about"
-            className="rounded-full border border-line px-6 py-3 font-mono text-sm text-text transition-colors hover:border-signal hover:text-signal"
-          >
+          </InteractiveHoverButton>
+          <InteractiveHoverButton href="#about" variant="secondary">
             What is R10-Xtreme?
-          </a>
+          </InteractiveHoverButton>
         </div>
       </div>
     </section>

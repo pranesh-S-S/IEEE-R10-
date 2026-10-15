@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { SmoothCursor } from "@/registry/magicui/smooth-cursor";
 import "./globals.css";
 
 const display = Space_Grotesk({
@@ -33,7 +34,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
-      <body className="bg-void text-text font-body antialiased">{children}</body>
+      <body className="bg-void text-text font-body antialiased">
+        <SmoothCursor />
+        {children}
+      </body>
     </html>
   );
 }

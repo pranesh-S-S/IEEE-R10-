@@ -24,8 +24,20 @@ const HASHTAG = `#${HASHTAG_RAW}`.toLowerCase();
 
 // vTools doesn't expose a `region=` query param on events/list, so region is
 // filtered locally against each event's `primary-host.region_spoids` (e.g.
-// "R10"). Set to an empty string to disable region filtering entirely.
+// "R0" or "R10"). In IEEE vTools database, Region 10 is represented as "R0".
+// Set to an empty string to disable region filtering entirely.
 const REGION = (process.env.VTOOLS_REGION_FILTER ?? "R10").toUpperCase();
+
+function matchesRegion(eventRegion: string | null | undefined, filterRegion: string): boolean {
+  if (!filterRegion) return true;
+  if (!eventRegion) return false;
+  const e = eventRegion.toUpperCase();
+  const f = filterRegion.toUpperCase();
+  if (f === "R10" || f === "R0") {
+    return e === "R10" || e === "R0";
+  }
+  return e === f;
+}
 
 export type XtremeEvent = {
   id: string;
@@ -168,5 +180,5 @@ export async function fetchIEEEEvents(): Promise<XtremeEvent[]> {
   return rawEvents
     .map(normalizeEvent)
     .filter((event) => event.hashtags.some((tag) => tag.toLowerCase() === HASHTAG))
-    .filter((event) => !REGION || event.region?.toUpperCase() === REGION);
+    .filter((event) => !REGION || matchesRegion(event.region, REGION));
 }

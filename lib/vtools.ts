@@ -140,6 +140,8 @@ function normalizeEvent(raw: RawEvent): XtremeEvent {
  * Fetches events already filtered server-side to the configured hashtag
  * (default "ieee"), then double-checks locally against each event's tags.
  */
+let memoryCache: XtremeEvent[] | null = null;
+
 export async function fetchIEEEEvents(): Promise<XtremeEvent[]> {
   const params = new URLSearchParams({
     tags: HASHTAG_RAW,
@@ -158,10 +160,16 @@ export async function fetchIEEEEvents(): Promise<XtremeEvent[]> {
       next: { revalidate: 900 }
     });
   } catch (networkErr) {
+    if (memoryCache && memoryCache.length > 0) {
+      return memoryCache;
+    }
     throw new Error(`Network error reaching vTools: ${(networkErr as Error).message}`);
   }
 
   if (!res.ok) {
+    if (memoryCache && memoryCache.length > 0) {
+      return memoryCache;
+    }
     const bodyText = await res.text().catch(() => "");
     throw new Error(
       `vTools Events API responded with ${res.status} ${res.statusText}. Body: ${bodyText.slice(0, 500)}`
@@ -172,13 +180,22 @@ export async function fetchIEEEEvents(): Promise<XtremeEvent[]> {
   try {
     json = await res.json();
   } catch {
+    if (memoryCache && memoryCache.length > 0) {
+      return memoryCache;
+    }
     throw new Error("vTools returned a non-JSON response (check the URL/headers).");
   }
 
   const rawEvents: RawEvent[] = json?.data ?? [];
 
-  return rawEvents
+  const processed = rawEvents
     .map(normalizeEvent)
     .filter((event) => event.hashtags.some((tag) => tag.toLowerCase() === HASHTAG))
     .filter((event) => !REGION || matchesRegion(event.region, REGION));
+
+  if (processed.length > 0) {
+    memoryCache = processed;
+  }
+
+  return processed;
 }
